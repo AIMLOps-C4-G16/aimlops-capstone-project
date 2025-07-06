@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>Dynamic Image Captioning Using FastAPI</title>
+  </head>
+  <body>
+
+    <form action="/dynamic" enctype="multipart/form-data" method="POST">
+      <input name="file" type="file" />
+      <input name="caption" type="submit" />
+    </form>
+
+    {% if img %}
+    <h1>Rendered Image</h1>
+    <img src="data:image/jpeg;base64,{{ img }}" />
+    <h3>{{ caption }}</h3>
+    {% else %}
+    <h1>Image will be rendered here...</h1>
+    {% endif %}
+
+  </body>
+</html>
