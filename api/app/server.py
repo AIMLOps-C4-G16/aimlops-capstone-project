@@ -3,27 +3,27 @@ from fastapi.templating import Jinja2Templates
 import base64
 import tempfile
 
-from api import __version__, schemas
+from app import __version__, schemas
 from inference import generate_caption
 
 PROJECT_NAME = 'Image Captioning API'
 
-app = FastAPI()
+api = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
-@app.get("/")
+@api.get("/")
 def dynamic_file(request: Request):
     return templates.TemplateResponse("dynamic.html", {"request": request})
 
-@app.get("/health", response_model=schemas.Health, status_code=200)
+@api.get("/health", response_model=schemas.Health, status_code=200)
 def health() -> dict:
     health = schemas.Health(
         name=PROJECT_NAME, api_version=__version__, model_name='', model_status=''
     )
     return health.model_dump()
 
-@app.post("/dynamic")
+@api.post("/dynamic")
 def dynamic(request: Request, file: UploadFile = File()):
     data = file.file.read()
     caption = ''
