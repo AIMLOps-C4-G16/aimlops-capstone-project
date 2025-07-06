@@ -10,8 +10,9 @@
     </form>
 
     {% if img %}
-    <h1>Rendered Image</h1>
+    <h1>Image</h1>
     <img src="data:image/jpeg;base64,{{ img }}" />
+    <h1>Caption</h1>
     <h3>{{ caption }}</h3>
     {% else %}
     <h1>Image will be rendered here...</h1>
