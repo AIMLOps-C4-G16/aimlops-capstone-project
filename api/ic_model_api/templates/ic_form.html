@@ -1,12 +1,12 @@
 <html>
   <head>
-    <title>Dynamic Image Captioning Using FastAPI</title>
+    <title>Image Captioning Form</title>
   </head>
   <body>
 
-    <form action="/dynamic" enctype="multipart/form-data" method="POST">
-      <input name="file" type="file" />
-      <input name="caption" type="submit" />
+    <form action="/caption" enctype="multipart/form-data" method="POST">
+      <input name="image" type="file" />
+      <input type="submit" />
     </form>
 
     {% if img %}
