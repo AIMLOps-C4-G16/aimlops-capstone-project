@@ -50,7 +50,7 @@ class ICModel:
 
             with torch.no_grad():
                 outputs = self.model.generate(**inputs, max_new_tokens=100, do_sample=True, temperature=0.8, top_p=0.9)
-                return self.tokenizer.decode(outputs[0]).split('assistant<|end_header_id|>')[1].split('<|eot_id|>')[0]
+                return self.tokenizer.decode(outputs[0]).split('assistant<|end_header_id|>')[1].split('<|eot_id|>')[0].strip()
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
