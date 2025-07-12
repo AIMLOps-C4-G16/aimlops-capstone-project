@@ -25,12 +25,12 @@ pip install icrawler
 
 To download images from Google:
 ```bash
-python3 food_images_mod.py --engine google
+python3 images_scraper.py --engine google
 ```
 
 To use Bing instead:
 ```bash
-python3 food_images_mod.py --engine bing
+python3 images_scraper.py --engine bing
 ```
 
 ## Output Structure
