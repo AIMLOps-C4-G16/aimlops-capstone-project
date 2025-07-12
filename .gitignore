@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+iisc-aimlops/
+directory/
+creates/
+
+a/
 
 # C extensions
 *.so
