@@ -21,6 +21,10 @@ class Settings(BaseSettings):
 
     IC_MODEL: List[ICModel] = []
 
+    TEMPLATES_DIRECTORY: str = "templates"
+
+    HF_INDEXING_STORE: str = "AIMLOps-C4-G16/indexing_api_store"
+
     class Config:
         case_sensitive = True
 

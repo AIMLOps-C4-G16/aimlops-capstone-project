@@ -1,6 +1,7 @@
 import torch
 import PIL
 
+from fastapi import HTTPException
 from unsloth import FastLanguageModel
 
 
@@ -52,4 +53,4 @@ class ICModel:
                 return self.tokenizer.decode(outputs[0]).split('assistant<|end_header_id|>')[1].split('<|eot_id|>')[0]
 
         except Exception as e:
-            raise str(e)
+            raise HTTPException(status_code=500, detail=str(e))

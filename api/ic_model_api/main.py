@@ -1,27 +1,23 @@
 from contextlib import asynccontextmanager
-import base64
-import tempfile
 from typing import Any
 
-from fastapi import APIRouter, FastAPI, Request, UploadFile, File
+from fastapi import APIRouter, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
-#from api import api_router
 from ic_model import ICModel
 from config import settings
+
+from captioning import captioning_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("## Loading the Image Captioning model")
     settings.IC_MODEL.append(ICModel())
-
     yield
-
     print("## Cleaning up the Image Captioning model and releasing resources")
     settings.IC_MODEL.clear()
-
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -31,32 +27,25 @@ app = FastAPI(
 
 
 root_router = APIRouter()
-templates = Jinja2Templates(directory="templates")
-
 
 @root_router.get("/")
-def home(request: Request):
-    return templates.TemplateResponse("ic_form.html", {"request": request})
-
-
-@root_router.post("/caption")
-def caption(request: Request, image: UploadFile = File()):
-    data = image.file.read()
-    caption = ''
-    with tempfile.NamedTemporaryFile() as tmp:
-        tmp.write(data)
-        caption = settings.IC_MODEL[0].caption(tmp.name)
-    image.file.close()
-
-    # encoding and decoding the image bytes
-    encoded_image = base64.b64encode(data).decode("utf-8")
-
-    return templates.TemplateResponse(
-        "ic_form.html", {"request": request,  "img": encoded_image, "caption": caption})
+def index(request: Request) -> Any:
+    """Basic HTML response."""
+    body = (
+        "<html>"
+        "<body style='padding: 10px;'>"
+        "<h1>Welcome to the API</h1>"
+        "<div>"
+        "Check the docs: <a href='/docs'>here</a>"
+        "</div>"
+        "</body>"
+        "</html>"
+    )
+    return HTMLResponse(content=body)
 
 
 app.include_router(root_router)
-#app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(captioning_router)
 
 
 # Set all CORS enabled origins
