@@ -1,6 +1,6 @@
 # Indian Traditional Food Image Crawler
 
-This script uses [`icrawler`](https://github.com/hellock/icrawler) to download traditional Indian food images from **Google** or **Bing**, and auto-generates simple captions for each image.
+This script uses [`icrawler`](https://github.com/hellock/icrawler) to download Indian food images from **Google** or **Bing**, and auto-generates simple captions for each image.
 
 ---
 
@@ -50,7 +50,7 @@ fd8f8aa82d7e42f1.jpg#1	Dal Baati Churma is a popular traditional food in Rajasth
 fd8f8aa82d7e42f1.jpg#2	People in Rajasthan often enjoy Dal Baati Churma during festivals or meals.
 ```
 
-## Configuration
+## Script Configuration
 
 Edit the script to customize:
 
