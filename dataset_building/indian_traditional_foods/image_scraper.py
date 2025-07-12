@@ -130,4 +130,4 @@ for state, dishes in indian_foods_by_state.items():
                     caption = template.format(dish=dish, state=state)
                     f.write(f"{filename}#{i}\t{caption}\n")
 
-print(f"\n All done! Completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+print(f"\n Completed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
