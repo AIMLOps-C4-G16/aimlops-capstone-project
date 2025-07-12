@@ -8,9 +8,8 @@ This script uses [`icrawler`](https://github.com/hellock/icrawler) to download I
 
 - Choose search engine: **Google** or **Bing**
 - Downloads `.jpg` / `.jpeg` images only
+- Renames image file to 16-char random alphanumeric names
 - Auto-generates 3 template based captions per image
-- Organizes images and captions for dataset creation
-- CLI interface for easy usage
 
 ---
 
