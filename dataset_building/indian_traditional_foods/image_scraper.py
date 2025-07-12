@@ -67,7 +67,7 @@ query_templates = [
 ]
 
 # -------------------------------
-# Custom Downloader (Rename file + Filter only .jpg file)
+# Custom Downloader (Rename file to 16-char random alphanumeric names + Filter only .jpg file)
 # -------------------------------
 class CustomDownloader(ImageDownloader):
     def get_filename(self, task, default_ext):
