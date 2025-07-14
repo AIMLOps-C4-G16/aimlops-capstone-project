@@ -2,10 +2,12 @@ fastapi
 uvicorn
 
 torch
-transformers
 unsloth
 
 python-multipart
 
 pydantic
 pydantic-settings
+
+huggingface_hub
+chromadb

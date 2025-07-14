@@ -28,7 +28,7 @@ class ICModel:
                     {"type": "text", "text": "In a short sentence, briefly describe what you see in this image."}
                 ]}
             ]
-        
+
         else:
             self.status = "Unable to load model: CUDA not available"
 
@@ -36,7 +36,7 @@ class ICModel:
     def caption(self, image_file):
         if self.status != "Model loaded":
             return self.status
-        
+
         try:
             image = PIL.Image.open(image_file)
 
