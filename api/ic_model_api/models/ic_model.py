@@ -35,7 +35,7 @@ class ICModel:
 
     def caption(self, image_file):
         if self.status != "Model loaded":
-            return self.status
+            raise HTTPException(status_code=500, detail=self.status)
 
         try:
             image = PIL.Image.open(image_file)

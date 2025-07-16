@@ -18,9 +18,8 @@ async def lifespan(app: FastAPI):
     print("## Loading the Image Captioning model")
     settings.IC_MODEL.append(ICModel())
 
-    if settings.IC_MODEL[0].status == "Model loaded":
-        print("## Building the Image Database index")
-        settings.IMAGE_DB_INDEX.append(ImageDatabaseIndex(settings.IC_MODEL[0], os.environ['HF_TOKEN']))
+    print("## Building the Image Database index")
+    settings.IMAGE_DB_INDEX.append(ImageDatabaseIndex(os.environ['HF_TOKEN']))
 
     yield
 
