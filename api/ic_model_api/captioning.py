@@ -16,7 +16,7 @@ def process_image(image: UploadFile):
     caption = ''
     with tempfile.NamedTemporaryFile() as tmp:
         tmp.write(data)
-        caption = settings.IC_MODEL[0].caption(tmp.name)
+        caption = settings.SHARED["IC_MODEL"].caption(tmp.name)
     image.file.close()
 
     return data, caption

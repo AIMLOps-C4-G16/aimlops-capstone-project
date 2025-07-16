@@ -16,16 +16,15 @@ from search import search_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("## Loading the Image Captioning model")
-    settings.IC_MODEL.append(ICModel())
+    settings.SHARED["IC_MODEL"] = ICModel()
 
     print("## Building the Image Database index")
-    settings.IMAGE_DB_INDEX.append(ImageDatabaseIndex(os.environ['HF_TOKEN']))
+    settings.SHARED["IMAGE_DB_INDEX"] = ImageDatabaseIndex(os.environ['HF_TOKEN'])
 
     yield
 
     print("## Cleaning up the Image Captioning model & Image Database index and releasing resources")
-    settings.IMAGE_DB_INDEX.clear()
-    settings.IC_MODEL.clear()
+    settings.SHARED.clear()
 
 app = FastAPI(
     title=settings.PROJECT_NAME,

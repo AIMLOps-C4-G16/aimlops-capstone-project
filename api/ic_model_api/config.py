@@ -1,9 +1,7 @@
-from typing import List
+from typing import List, Dict
 
 from pydantic import AnyHttpUrl
 from pydantic_settings import BaseSettings
-
-from models import ICModel, ImageDatabaseIndex
 
 
 class Settings(BaseSettings):
@@ -21,9 +19,7 @@ class Settings(BaseSettings):
 
     TEMPLATES_DIRECTORY: str = "templates"
 
-    IC_MODEL: List[ICModel] = []
-
-    IMAGE_DB_INDEX: List[ImageDatabaseIndex] = []
+    SHARED: Dict = {}
 
     class Config:
         case_sensitive = True

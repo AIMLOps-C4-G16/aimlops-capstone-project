@@ -16,13 +16,13 @@ def caption_image(image: UploadFile):
     with tempfile.NamedTemporaryFile() as tmp:
         tmp.write(image.file.read())
         image.file.close()
-        caption = settings.IC_MODEL[0].caption(tmp.name)
+        caption = settings.SHARED["IC_MODEL"].caption(tmp.name)
     return caption
 
 
 @search_router.post("/search")
 def search(request: Request, text: Annotated[str, Form()], num: Annotated[int, Form()] = 3):
-    return settings.IMAGE_DB_INDEX[0].search(text, num)
+    return settings.SHARED["IMAGE_DB_INDEX"].search(text, num)
 
 
 @search_router.get("/search_page")
@@ -32,7 +32,7 @@ def search_home(request: Request):
 
 @search_router.post("/search_page")
 def search_page(request: Request, text: Annotated[str, Form()], num: Annotated[int, Form()] = 3):
-    imgs_list = settings.IMAGE_DB_INDEX[0].search(text, num)
+    imgs_list = settings.SHARED["IMAGE_DB_INDEX"].search(text, num)
     return templates.TemplateResponse(
         "search_form.html", {"request": request,  "imgs_list": imgs_list})
 
@@ -40,7 +40,7 @@ def search_page(request: Request, text: Annotated[str, Form()], num: Annotated[i
 @search_router.post("/search_similar")
 def search_similar(request: Request, image: UploadFile = File(), num: Annotated[int, Form()] = 3):
     caption = caption_image(image)
-    return settings.IMAGE_DB_INDEX[0].search(caption, num)
+    return settings.SHARED["IMAGE_DB_INDEX"].search(caption, num)
 
 
 @search_router.get("/search_similar_page")
@@ -51,6 +51,6 @@ def search_similar_home(request: Request):
 @search_router.post("/search_similar_page")
 def search_similar_page(request: Request, image: UploadFile = File(), num: Annotated[int, Form()] = 3):
     caption = caption_image(image)
-    imgs_list = settings.IMAGE_DB_INDEX[0].search(caption, num)
+    imgs_list = settings.SHARED["IMAGE_DB_INDEX"].search(caption, num)
     return templates.TemplateResponse(
         "search_similar_form.html", {"request": request,  "imgs_list": imgs_list, "caption": caption})
