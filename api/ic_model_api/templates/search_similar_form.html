@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Search Image by Similar Image Form</title>
+  </head>
+  <body>
+
+    <form action="/search_similar_page" enctype="multipart/form-data" method="POST">
+      <input name="image" type="file" />
+      <input name="num" placeholder=3 type="number">
+      <input type="submit" />
+    </form>
+
+    {% if imgs_list %}
+      <h1>Generated caption</h1>
+      <h3>{{ caption }}</h3>
+      <h1>Image search results:</h1>
+      <table width="100%" border="0" cellpadding="0"> 
+      {% for imgs in imgs_list %}
+        <tr>
+        {% for img in imgs %}
+          <td> <img src="data:image/jpeg;base64,{{ img }}" /> </td>
+        {% endfor %}
+        </tr>
+      {% endfor %}
+      </table>
+    {% else %}
+      <h1>Image search results will be rendered here...</h1>
+    {% endif %}
+
+  </body>
+</html>

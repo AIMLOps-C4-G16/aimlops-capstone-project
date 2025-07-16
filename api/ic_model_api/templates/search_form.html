@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Search Image by Caption Form</title>
+  </head>
+  <body>
+
+    <form action="/search_page" enctype="multipart/form-data" method="POST">
+      <input name="text" type="text">
+      <input name="num" placeholder=3 type="number">
+      <input type="submit" />
+    </form>
+
+    {% if imgs_list %}
+      <h1>Image search results:</h1>
+      <table width="100%" border="0" cellpadding="0"> 
+      {% for imgs in imgs_list %}
+        <tr>
+        {% for img in imgs %}
+          <td> <img src="data:image/jpeg;base64,{{ img }}" /> </td>
+        {% endfor %}
+        </tr>
+      {% endfor %}
+      </table>
+    {% else %}
+      <h1>Image search results will be rendered here...</h1>
+    {% endif %}
+
+  </body>
+</html>
