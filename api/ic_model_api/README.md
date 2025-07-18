@@ -1,4 +1,4 @@
-To run server, navigate to this folder and run:
+To run the API server, navigate to this folder and run:
 ```
 export HF_TOKEN="your HuggingFace token for reading the indexing_api_store dataset from the AIMLOps-C4-G16 organisation"
 uvicorn main:app --host 0.0.0.0 --port 8000 &>/content/logs.txt &
