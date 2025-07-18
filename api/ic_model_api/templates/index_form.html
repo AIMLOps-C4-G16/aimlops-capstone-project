@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Images Indexing Form</title>
+  </head>
+  <body>
+
+    <form action="/index_page" enctype="multipart/form-data" method="POST">
+      <input name="images" type="file" multiple />
+      <input type="submit" />
+    </form>
+
+    {% if img_caption_pairs %}
+      <h1>Successfully indexed {{ num }} images with these generated captions:</h1>
+      <table width="100%" border="0" cellpadding="0">
+        {% for (img, caption) in img_caption_pairs %}
+          <tr>
+            <img src="data:image/jpeg;base64,{{ img }}" />
+            <p>Caption: {{ caption }}</p>
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <h1>Image indexing results will be rendered here...</h1>
+    {% endif %}
+
+  </body>
+</html>
