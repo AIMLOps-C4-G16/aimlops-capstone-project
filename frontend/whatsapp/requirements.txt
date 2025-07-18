@@ -1,0 +1,13 @@
+openai
+langchain-openai
+langchain-core
+langchain-community
+sentence-transformers
+langchain-huggingface
+langchain-chroma
+chromadb
+pypdf
+twilio
+googletrans
+nest_asyncio
+python-dotenv

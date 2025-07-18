@@ -5,8 +5,12 @@ __pycache__/
 iisc-aimlops/
 directory/
 creates/
-
+aimlops
 a/
+.env
+response_*.json
+output_image.jpg
+imgextract.py
 
 # C extensions
 *.so
