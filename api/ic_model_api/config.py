@@ -19,6 +19,8 @@ class Settings(BaseSettings):
 
     TEMPLATES_DIRECTORY: str = "templates"
 
+    USER_IMAGE_DB_DIRECTORY: str = "user_images_collection"
+
     SHARED: Dict = {}
 
     class Config:

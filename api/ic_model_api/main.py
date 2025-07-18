@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 import os
+import shutil
 from typing import Any
 
 from fastapi import APIRouter, FastAPI, Request
@@ -10,6 +11,7 @@ from models import ICModel, ImageDatabaseIndex
 
 from config import settings
 from captioning import captioning_router
+from indexing import indexing_router
 from search import search_router
 
 
@@ -17,14 +19,19 @@ from search import search_router
 async def lifespan(app: FastAPI):
     print("## Loading the Image Captioning model")
     settings.SHARED["IC_MODEL"] = ICModel()
-
+    
     print("## Building the Image Database index")
+    if os.path.exists(settings.USER_IMAGE_DB_DIRECTORY):
+        shutil.rmtree(settings.USER_IMAGE_DB_DIRECTORY)
+    os.makedirs(settings.USER_IMAGE_DB_DIRECTORY)
+
     settings.SHARED["IMAGE_DB_INDEX"] = ImageDatabaseIndex(os.environ['HF_TOKEN'])
 
     yield
 
     print("## Cleaning up the Image Captioning model & Image Database index and releasing resources")
     settings.SHARED.clear()
+    shutil.rmtree(settings.USER_IMAGE_DB_DIRECTORY)
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -43,6 +50,7 @@ def index(request: Request) -> Any:
 
 app.include_router(root_router)
 app.include_router(captioning_router)
+app.include_router(indexing_router)
 app.include_router(search_router)
 
 
