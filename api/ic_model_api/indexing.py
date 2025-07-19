@@ -44,7 +44,8 @@ def index_images(images: List[UploadFile]):
 
 @indexing_router.post("/index")
 def index(request: Request, images: List[UploadFile]):
-    return index_images(images)
+    _, msg = index_images(images)
+    return msg
 
 
 @indexing_router.get("/index_page")
