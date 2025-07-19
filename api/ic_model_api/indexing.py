@@ -37,15 +37,14 @@ def index_images(images: List[UploadFile]):
         image_files.append(filename)
         captions.append(caption)
     
-    settings.SHARED["IMAGE_DB_INDEX"].index(image_files, captions)
+    msg = settings.SHARED["IMAGE_DB_INDEX"].index(image_files, captions)
 
-    return list(zip(image_data, captions))
+    return list(zip(image_data, captions)), msg
 
 
 @indexing_router.post("/index")
 def index(request: Request, images: List[UploadFile]):
-    index_images(images)
-    return f"Successfully indexed {len(images)} images"
+    return index_images(images)
 
 
 @indexing_router.get("/index_page")
@@ -55,6 +54,6 @@ def index_home(request: Request):
 
 @indexing_router.post("/index_page")
 def index_page(request: Request, images: List[UploadFile]):
-    img_caption_pairs = index_images(images)
+    img_caption_pairs, msg = index_images(images)
     return templates.TemplateResponse(
-        "index_form.html", {"request": request,  "img_caption_pairs": img_caption_pairs, "num": len(img_caption_pairs)})
+        "index_form.html", {"request": request,  "img_caption_pairs": img_caption_pairs, "msg": msg})

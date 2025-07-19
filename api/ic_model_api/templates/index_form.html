@@ -10,7 +10,7 @@
     </form>
 
     {% if img_caption_pairs %}
-      <h1>Successfully indexed {{ num }} images with these generated captions:</h1>
+      <h1>{{ msg }} with these generated captions:</h1>
       <table width="100%" border="0" cellpadding="0">
         {% for (img, caption) in img_caption_pairs %}
           <tr>
