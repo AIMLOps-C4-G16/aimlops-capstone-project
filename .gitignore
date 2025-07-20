@@ -8,9 +8,14 @@ creates/
 aimlops
 a/
 .env
+whatsapp_old.py
+fbmain.py
 response_*.json
 output_image.jpg
 imgextract.py
+whatsapp_llm_bot.py
+whatsapp_session_flow.py
+asynctest.py
 
 # C extensions
 *.so
