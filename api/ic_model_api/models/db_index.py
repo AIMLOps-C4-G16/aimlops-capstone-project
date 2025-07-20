@@ -68,7 +68,7 @@ class ImageDatabaseIndex:
             result = []
 
             # Get results from user database
-            collection = self.db_client.get_collection(name="user", embedding_function=self.embedding_function)
+            collection = self.db_client.get_or_create_collection(name="user", embedding_function=self.embedding_function)
             ids = collection.query(query_texts=[text], n_results=num)['ids'][0]
 
             images_data = []
