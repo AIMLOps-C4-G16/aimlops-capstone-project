@@ -96,7 +96,7 @@ async def whatsapp_webhook(request: Request):
                 send_whatsapp_message(to=from_number, message="🔍 Nice choice! What would you like to search for? Type your keywords.")
             elif body_text == "3":
                 user_state["step"] = "awaiting_image_for_similar"
-                send_whatsapp_message(to=from_number, message="📷 Okay! Please upload an image and tell me how many similar ones you want. (e.g., `3`).")
+                send_whatsapp_message(to=from_number, message="📷 Okay! Please upload an image.")
             elif body_text == "4":
                 user_state["step"] = "awaiting_images_for_indexing"
                 send_whatsapp_message(to=from_number, message="📤 Please upload *multiple images* to index.")

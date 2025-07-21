@@ -9,6 +9,7 @@ aimlops
 a/
 .env
 whatsapp_old.py
+whatsapp_webhook_meta.py
 fbmain.py
 response_*.json
 output_image.jpg
