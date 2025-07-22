@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+langchain
+openai
+pydantic
+python-multipart
+langchain-community
+langchain-openai
+cachetools
