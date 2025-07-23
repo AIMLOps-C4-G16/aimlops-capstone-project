@@ -30,6 +30,10 @@ def caption_image_tool(image_path: str) -> str:
             response = requests.post(CAPTION_API_URL, headers=headers, files=files)
             response.raise_for_status()
             result = response.json()
+            result = {
+                "caption": result
+            }
+
             print(f"Caption response: {result}")
     except Exception as e:
         caption = f"[Error] Failed to get caption: {str(e)}"

@@ -45,7 +45,10 @@ def search_image_by_text_tool(query: str) -> list:
                 except Exception as e:
                     print(f"❌ Error decoding base64 image: {e}")
         print(f"✅ Found {categorized_urls} categories with images.")
-        return categorized_urls
+        result = {
+            "search_images": categorized_urls
+        }
+        return result
 
     except Exception as e:
         print(f"❌ search_image_by_text_tool error: {e}")

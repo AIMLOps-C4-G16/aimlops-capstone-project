@@ -52,9 +52,10 @@ def index_images_to_the_stores(image_paths: List[str]) -> List[str]:
             return []
 
         response_data = response.json()
-
-        print(f"✅ Response {response_data} images.")
-        return response_data
+        result = {
+           "index_response": response_data
+        }
+        return result
 
     except Exception as err:
         print(f"❌ index_images_to_the_stores failed: {err}")

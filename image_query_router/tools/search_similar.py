@@ -55,7 +55,10 @@ def search_similar_image_tool(image_path: str, num: int = 3) -> list:
                 except Exception as e:
                     print(f"❌ Error decoding base64 image: {e}")
         print(f"✅ Found {image_urls} categories with images.")
-        return image_urls
+        result = {
+            "similar_images": image_urls
+        }
+        return result
 
     except Exception as err:
         print(f"❌ search_similar_image_tool failed: {err}")
