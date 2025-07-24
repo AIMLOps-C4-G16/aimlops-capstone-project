@@ -148,6 +148,11 @@ function Home() {
             ...msgs,
             { type: 'index', file: imageFiles, indexResponse: res.index_response },
           ]);
+        } else if(res.search_images){
+          setMessages((msgs) => [
+            ...msgs,
+            { type: 'search', text: searchText, images: res.search_images },
+          ]);
         } else {
           setMessages((msgs) => [
             ...msgs,
@@ -184,6 +189,7 @@ function Home() {
           { type: 'search', text: searchText, images: similarIds },
         ]);
         setSearchText('');
+      
       } else {
         alert('Please enter text or upload an image.');
       }
