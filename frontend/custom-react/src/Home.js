@@ -156,7 +156,7 @@ function Home() {
         } else {
           setMessages((msgs) => [
             ...msgs,
-            { type: 'system', text: 'No results found' },
+            { type: 'system', text: typeof res === 'string'? res: 'No results found' },
           ]);
         }
         // if (isSimilarSearch) {

@@ -51,7 +51,7 @@ export const getQuerySearch = async (query, files) => {
   if(data?.result?.search_images){
     data.result.search_images = data.result.search_images?.map(image => getImageById(image));
   } 
-  if(dara?.result?.similar_images){
+  if(data?.result?.similar_images){
     data.result.similar_images = data.result.similar_images?.map(image => getImageById(image));
   }
   return data.result;
