@@ -187,7 +187,7 @@ function Home() {
         if(typeof similarIds === 'string'){
           setMessages((msgs) => [
             ...msgs,
-            { type: 'system', text: typeof res === 'string'? res: 'No results found' },
+            { type: 'system', text: similarIds },
           ]);
         } else {
           setMessages((msgs) => [
