@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Base API configuration
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'; // Adjust this to your backend URL
-const IMAGE_API_URL = process.env.REACT_APP_IMAGE_API_URL || 'http://localhost:8080'; // For image fetches by ID
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:9000'; // Adjust this to your backend URL
+const IMAGE_API_URL = process.env.REACT_APP_IMAGE_API_URL || 'http://localhost:9000'; // For image fetches by ID
 
 // Create axios instance with default config
 const apiClient = axios.create({
@@ -43,6 +43,12 @@ export const getMultipleCaptions = async (files) => {
 export const searchMultipleSimilar = async (files) => {
   const data = await processImages({ query: 'similar', files });
   return data.result.similar_images?.map(image => getImageById(image));
+};
+
+// 1. getMultipleCaptions: query=caption, files required
+export const getQuerySearch = async (query, files) => {
+  const data = await processImages({ query: query, files });
+  return data.result;
 };
 
 // 3. searchImages: query=searchText, no files

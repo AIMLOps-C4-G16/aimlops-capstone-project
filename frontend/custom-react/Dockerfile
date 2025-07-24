@@ -13,7 +13,13 @@ RUN npm install --legacy-peer-deps
 # Copy the rest of the app source code
 COPY . .
 
-# Build the React app for production
+# Add these lines to accept build arguments and set them as environment variables
+ARG REACT_APP_API_BASE_URL
+ARG REACT_APP_IMAGE_API_URL
+ENV REACT_APP_API_BASE_URL=$REACT_APP_API_BASE_URL
+ENV REACT_APP_IMAGE_API_URL=$REACT_APP_IMAGE_API_URL
+
+# Build the React app for production (these env vars will be injected)
 RUN npm run build:prod
 
 # Use a lightweight web server to serve the static files

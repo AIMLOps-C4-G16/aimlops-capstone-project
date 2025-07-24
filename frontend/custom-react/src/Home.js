@@ -129,21 +129,36 @@ function Home() {
           ...msgs,
           { type: 'user', text: `"${searchText}" with ${imageFiles.length} uploaded image(s).` }
         ]);
-        if (isSimilarSearch) {
-          // Similar search with images
-          const similarIds = await searchMultipleSimilar(imageFiles);
+
+        const res =await getQuerySearch(searchText, imageFiles);
+
+        console.log('res==============', res)
+        if(res.similar_images){
           setMessages((msgs) => [
             ...msgs,
-            { type: 'similar', file: imageFiles[0], images: similarIds },
+            { type: 'similar', file: imageFiles[0], images: res.similar_images },
           ]);
-        } else {
-          // Captioning with images
-          const captions = await getMultipleCaptions(imageFiles);
+        } else if(res.caption){
           setMessages((msgs) => [
             ...msgs,
-            { type: 'caption', files: imageFiles, captions },
+            { type: 'caption', files: imageFiles, captions: res.caption },
           ]);
         }
+        // if (isSimilarSearch) {
+        //   // Similar search with images
+        //   const similarIds = await searchMultipleSimilar(imageFiles);
+        //   setMessages((msgs) => [
+        //     ...msgs,
+        //     { type: 'similar', file: imageFiles[0], images: similarIds },
+        //   ]);
+        // } else {
+        //   // Captioning with images
+        //   const captions = await getMultipleCaptions(imageFiles);
+        //   setMessages((msgs) => [
+        //     ...msgs,
+        //     { type: 'caption', files: imageFiles, captions },
+        //   ]);
+        // }
         setImageFiles([]);
         setAttachmentType(null);
         setSearchText('');
