@@ -30,7 +30,7 @@ permissions:
 
 defaults:
     run:
-      working-directory: api/ic_model_api/
+      working-directory: api/
 
 
 jobs:
