@@ -24,7 +24,7 @@ env:
   ECS_SERVICE: model-api-ec2-service-g68pvl67
   ECS_CLUSTER: capstone-project-ecs-cluster
   ECS_TASK_DEFINITION: .aws/service-model-api-ec2.json
-  CONTAINER_NAME: ic-model-api
+  CONTAINER_NAME: model-api
 
 
 permissions:
