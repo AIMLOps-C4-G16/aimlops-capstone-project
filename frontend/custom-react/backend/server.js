@@ -249,6 +249,56 @@ app.post('/search', async (req, res) => {
   }
 });
 
+// POST /process/ - Unified endpoint for caption, similar, and search
+app.post('/process/', upload.array('files'), async (req, res) => {
+  const { query } = req.body;
+  const files = req.files;
+
+  await simulateDelay(1000);
+
+  if (!query) {
+    return res.status(400).json({ error: 'Query parameter is required' });
+  }
+
+  // Mock image IDs for similar/search
+  const mockImageIds = [
+    '34d2b691-1623-4ee2-bc3f-e3d29b828990',
+    'ce252c44-6fe2-4fc0-9197-bb785cab114b',
+    'd247a6dd-6321-4702-b85a-7522a50f990b'
+  ];
+
+  if (query === 'caption') {
+    // Captioning: must have at least one file
+    if (!files || files.length === 0) {
+      return res.status(400).json({ error: 'At least one image file is required for caption.' });
+    }
+    return res.json({
+      result: {
+        caption: [
+          'The image shows a group of women wearing traditional clothing, with their faces blurred out. They are dressed in vibrant, striped skirts and tops, with red and yellow accents. The background appears to be a mountainous landscape.'
+        ]
+      }
+    });
+  } else if (query === 'similar') {
+    // Similar search: must have at least one file
+    if (!files || files.length === 0) {
+      return res.status(400).json({ error: 'At least one image file is required for similar search.' });
+    }
+    return res.json({
+      result: {
+        similar_images: mockImageIds
+      }
+    });
+  } else {
+    // Text search: no files required, return similar_images
+    return res.json({
+      result: {
+        similar_images: mockImageIds
+      }
+    });
+  }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
