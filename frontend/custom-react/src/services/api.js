@@ -60,7 +60,10 @@ export const getQuerySearch = async (query, files) => {
 // 3. searchImages: query=searchText, no files
 export const searchImages = async (searchText) => {
   const data = await processImages({ query: searchText });
-  return data.result.search_images?.map(image => getImageById(image));
+  if(data.result?.search_images){
+    return data.result.search_images?.map(image => getImageById(image));
+  } 
+  return data.result;
 };
 
 // Get image by ID for display

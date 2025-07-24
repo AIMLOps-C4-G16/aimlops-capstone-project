@@ -184,10 +184,17 @@ function Home() {
           { type: 'user', text: searchText }
         ]);
         const similarIds = await searchImages(searchText);
-        setMessages((msgs) => [
-          ...msgs,
-          { type: 'search', text: searchText, images: similarIds },
-        ]);
+        if(typeof similarIds === 'string'){
+          setMessages((msgs) => [
+            ...msgs,
+            { type: 'system', text: typeof res === 'string'? res: 'No results found' },
+          ]);
+        } else {
+          setMessages((msgs) => [
+            ...msgs,
+            { type: 'search', text: searchText, images: similarIds || [] },
+          ]);
+        }
         setSearchText('');
       
       } else {
