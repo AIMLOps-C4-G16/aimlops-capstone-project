@@ -10,6 +10,9 @@ on:
     branches: [ "main" ]
     paths:
       - 'api/ic_model_api/**/*'
+      - 'api/Dockerfile.ic-model'
+      - 'api/requirements.ic-model.txt'
+      - '.aws/service-model-api-ec2.json'
       - '.github/workflows/service-model-api-deploy.yml'
   
   workflow_dispatch:
