@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import Chat from './components/Chat';
 import BottomBar from './components/BottomBar';
-import { getMultipleCaptions, searchMultipleSimilar, searchImages, validateImageFile } from './services/api';
+import { getQuerySearch, getMultipleCaptions, searchMultipleSimilar, searchImages, validateImageFile } from './services/api';
 import { saveUser, loadUser, clearUser, saveChatHistory, loadChatHistory, clearChatHistory, debugLocalStorage } from './utils/auth';
 import './App.css';
 
@@ -119,7 +119,7 @@ function Home() {
     if (loading) return;
     setLoading(true);
     try {
-      if (imageFiles.length > 0 && searchText) {
+      if (imageFiles.length > 0 ) {
         // If user enters text and uploads images, treat as similar search if text includes 'similar', else caption
         const isSimilarSearch = searchText.toLowerCase().includes('find similar') || 
                                searchText.toLowerCase().includes('similar') ||
@@ -143,6 +143,16 @@ function Home() {
             ...msgs,
             { type: 'caption', files: imageFiles, captions: res.caption },
           ]);
+        } else if(res.index_response){
+          setMessages((msgs) => [
+            ...msgs,
+            { type: 'index', file: imageFiles, indexResponse: res.index_response },
+          ]);
+        } else {
+          setMessages((msgs) => [
+            ...msgs,
+            { type: 'system', text: 'No results found' },
+          ]);
         }
         // if (isSimilarSearch) {
         //   // Similar search with images
@@ -162,19 +172,6 @@ function Home() {
         setImageFiles([]);
         setAttachmentType(null);
         setSearchText('');
-      } else if (imageFiles.length > 0 && !searchText) {
-        // Images only - treat as similar image search
-        setMessages((msgs) => [
-          ...msgs,
-          { type: 'user', text: `Uploaded ${imageFiles.length} image(s) to search similar.` }
-        ]);
-        const similarIds = await searchMultipleSimilar(imageFiles);
-        setMessages((msgs) => [
-          ...msgs,
-          { type: 'similar', file: imageFiles[0], images: similarIds },
-        ]);
-        setImageFiles([]);
-        setAttachmentType(null);
       } else if (imageFiles.length === 0 && searchText) {
         // Text only - treat as image search
         setMessages((msgs) => [

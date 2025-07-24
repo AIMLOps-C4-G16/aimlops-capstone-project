@@ -18,6 +18,12 @@ function Chat({ model, messages }) {
                 <span>{message.text}</span>
               </div>
             )}
+
+            {message.type === 'index' && (
+              <div className="index-message">
+                <span>{message.indexResponse}</span>
+              </div>
+            )}
             
             {message.type === 'caption' && (
               <div className="caption-message">
