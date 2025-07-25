@@ -7,6 +7,8 @@ on:
       - 'api/compose.ic-model.yml'
       - 'api/Dockerfile.ic-model'
       - 'api/requirements.ic-model.txt'
+      - 'compose.yml'
+      - '.github/workflows/ec2-deploy.yml'
   
   workflow_dispatch:
 
@@ -28,7 +30,6 @@ jobs:
           aws_ec2_ami_id: ami-011f45022c7d14983 # amazon/Deep Learning OSS Nvidia Driver AMI GPU PyTorch 2.7 (Amazon Linux 2023) 20250719
           aws_ec2_instance_type: g5.xlarge
           aws_ec2_instance_root_vol_size: 30
-          aws_ec2_security_group_name: CapstoneProjectSG
           aws_ec2_port_list: 22,80,443,8000
 
           aws_vpc_id: vpc-0128ff2c7703a585c
