@@ -1,10 +1,11 @@
-FROM nvidia/cuda:12.1.1-cudnn8-runtime-ubuntu22.04
+FROM nvidia/cuda:12.9.1-cudnn-runtime-ubuntu22.04
 
 COPY /ic_model_api/ /api/
 COPY requirements.ic-model.txt /api/requirements.txt
 
 WORKDIR /api
 
+RUN rm /etc/apt/sources.list.d/cuda-ubuntu2204-x86_64.list && apt-key del 7fa2af80
 RUN apt-get update && apt-get install -y python3 python3-pip
 RUN pip install -r requirements.txt
 

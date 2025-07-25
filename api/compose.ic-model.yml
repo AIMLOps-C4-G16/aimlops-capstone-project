@@ -1,0 +1,10 @@
+services:
+  ic_model:
+    build:
+      context: .
+      dockerfile: Dockerfile.ic-model
+    ports:
+    - "8000:8000"
+    gpus: all
+    environment:
+      HF_TOKEN:
