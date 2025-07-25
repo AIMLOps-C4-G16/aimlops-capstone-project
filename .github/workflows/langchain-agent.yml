@@ -2,7 +2,7 @@
 # and then will deploy a new task definition to Amazon ECS, when there is a push to the "main" branch.
 
 
-name: Image Captioning Model API - Continuous Deployment
+name: LangChain Build
 
 
 on:
