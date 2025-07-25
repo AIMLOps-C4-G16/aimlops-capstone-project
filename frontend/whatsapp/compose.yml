@@ -1,0 +1,14 @@
+services:
+  whatsapp:
+    build: .
+    ports:
+    - "8001:8000"
+    environment:
+      TWILIO_ACCOUNT_SID:
+      TWILIO_AUTH_TOKEN:
+      TWILIO_WHATSAPP_NUMBER:
+      IMAGE_API_URL:
+      SEARCH_API_URL:
+      SEARCH_SIMILAR_API_URL:
+      INDEX_API_URL:
+      PUBLIC_BASE_URL:

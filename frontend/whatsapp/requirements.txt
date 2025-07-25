@@ -1,13 +1,6 @@
-openai
-langchain-openai
-langchain-core
-langchain-community
-sentence-transformers
-langchain-huggingface
-langchain-chroma
-chromadb
-pypdf
+fastapi
+uvicorn
+
 twilio
-googletrans
 nest_asyncio
 python-dotenv
