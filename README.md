@@ -39,7 +39,7 @@ The system follows a microservices architecture with five main components:
                 │         IC Model API (Core ML)          │
                 │              Port: 8000                 │
                 │                                         │
-                │ • Image Captioning (BLIP)               │
+                │ • Image Captioning (Llama3.2-11B)       │
                 │ • Semantic Search (CLIP)                │
                 │ • Vector Database (ChromaDB)            │
                 │ • GPU Acceleration                      │
@@ -48,7 +48,7 @@ The system follows a microservices architecture with five main components:
 
 ### Component Details
 
-1. **IC Model API** (`api/ic_model_api/`): Core ML backend with BLIP and CLIP models
+1. **IC Model API** (`api/ic_model_api/`): Core ML backend with Llama3.2-11B and CLIP models
 2. **Image Query Router** (`image_query_router/`): LangChain-based intelligent query processing
 3. **React Backend** (`frontend/custom-react/backend/`): API gateway for web frontend
 4. **React Frontend** (`frontend/custom-react/`): Modern web interface
@@ -58,7 +58,7 @@ The system follows a microservices architecture with five main components:
 
 ### Backend & AI/ML
 - **FastAPI**: High-performance Python web frameworks
-- **Transformers**: Hugging Face models (BLIP, CLIP)
+- **Transformers**: Hugging Face models (Llama3.2-11B, CLIP)
 - **LangChain**: AI agent orchestration and tool integration
 - **ChromaDB**: Vector database for semantic search
 - **PyTorch**: Deep learning framework
@@ -298,7 +298,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- **Hugging Face**: Pre-trained BLIP and CLIP models
+- **Hugging Face**: Pre-trained Llama3.2-11B and CLIP models
+- **Unsloth**: 4-bit quantized version of the Llama3.2-11B-vision-instruct model
 - **LangChain**: AI agent framework and tools
 - **Twilio**: WhatsApp integration platform
 - **FastAPI**: High-performance web framework
