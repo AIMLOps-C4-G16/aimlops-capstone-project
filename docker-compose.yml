@@ -1,0 +1,118 @@
+services:
+  # IC Model API - Core ML backend
+  ic-model-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile.ic-model
+    ports:
+      - "8000:8000"
+    environment:
+      - HF_TOKEN=${HF_TOKEN}
+    volumes:
+      - model_cache:/root/.cache/huggingface
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - aimlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Image Query Router - Main processing service
+  image-query-router:
+    build:
+      context: ./image_query_router
+    ports:
+      - "8001:8000"
+    environment:
+      - IC_MODEL_API_URL=http://ic-model-api:8000
+    depends_on:
+      - ic-model-api
+    networks:
+      - aimlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React Backend - API Gateway
+  react-backend:
+    build:
+      context: ./frontend/custom-react/backend
+    ports:
+      - "8002:8000"
+    environment:
+      - IMAGE_QUERY_ROUTER_URL=http://image-query-router:8000
+      - IC_MODEL_API_URL=http://ic-model-api:8000
+    depends_on:
+      - image-query-router
+    networks:
+      - aimlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/models"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # React Frontend - Web UI
+  react-frontend:
+    build:
+      context: ./frontend/custom-react
+      args:
+        - REACT_APP_API_BASE_URL=http://localhost:8002
+        - REACT_APP_IMAGE_API_URL=http://localhost:8001
+    ports:
+      - "3000:80"
+    depends_on:
+      - react-backend
+    networks:
+      - aimlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # WhatsApp Bot - Messaging interface
+  whatsapp-bot:
+    build:
+      context: ./frontend/whatsapp
+    ports:
+      - "8003:8000"
+    environment:
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_WHATSAPP_NUMBER=${TWILIO_WHATSAPP_NUMBER}
+      - IMAGE_API_URL=http://ic-model-api:8000/caption
+      - SEARCH_API_URL=http://ic-model-api:8000/search
+      - SEARCH_SIMILAR_API_URL=http://ic-model-api:8000/search_similar
+      - INDEX_API_URL=http://ic-model-api:8000/index
+      - PUBLIC_BASE_URL=${PUBLIC_BASE_URL:-http://localhost:8003}
+    depends_on:
+      - ic-model-api
+    networks:
+      - aimlops-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+networks:
+  aimlops-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  model_cache:
+    driver: local

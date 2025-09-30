@@ -1,2 +1,4 @@
+# Legacy compose file - use docker-compose.yml for full stack
+# This file is kept for backward compatibility with WhatsApp-only deployments
 include:
    - frontend/whatsapp/compose.yml
