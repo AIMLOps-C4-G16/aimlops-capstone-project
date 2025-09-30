@@ -28,11 +28,11 @@ The system follows a microservices architecture with five main components:
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          ▼                       ▼                       │
-┌─────────────────┐    ┌─────────────────┐              │
-│  React Backend  │────► Image Query     │              │
-│  (API Gateway)  │    │ Router          │              │
-│  Port: 8002     │    │ Port: 8001      │              │
-└─────────────────┘    └─────────────────┘              │
+┌─────────────────┐     ┌─────────────────┐              │
+│  React Backend  │────►│  Image Query    │              │
+│  (API Gateway)  │     │ Router          │              │
+│  Port: 8002     │     │ Port: 8001      │              │
+└─────────────────┘     └─────────────────┘              │
                                  │                       │
                                  ▼                       ▼
                 ┌─────────────────────────────────────────┐
@@ -306,9 +306,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Documentation**: [Full documentation](docs/)
-- **Issues**: [GitHub Issues](https://github.com/your-username/aimlops-capstone-project/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/your-username/aimlops-capstone-project/discussions)
+- **Documentation**: [Full documentation](https://github.com/AIMLOps-C4-G16/aimlops-capstone-project/wiki)
+- **Issues**: [GitHub Issues](https://github.com/AIMLOps-C4-G16/aimlops-capstone-project/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/AIMLOps-C4-G16/aimlops-capstone-project/discussions)
 
 ---
 
